@@ -1,0 +1,50 @@
+
+<?php 
+echo Phalcon\Tag::form('client/add');
+?>
+<div class="card">
+	<div class="card-header">
+		<h5><span class="fa fa-pen text-success"> </span> Client Add</h5>
+	</div>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Name *</span>
+				 <?php echo $this->tag->textField(['name' ,"value"=>$Client->getName(), "class"=>"form-control","required"=>1]); ?>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
+				 <?php echo $this->tag->textField(['country',"value"=>$Client->getCountry(), "class"=>"form-control"]); ?>
+				</div>
+					<div  class="form-text text-muted d-sm-none d-md-block">Please use ISO-3166-1 ALPHA-2 code - <a href="https://laendercode.net/en/2-letter-list.html" target="_blank" class="text-info"><span class="fa fa-link"></span> Liste complète</a></div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-12">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Address</span>
+				 <?php echo $this->tag->textArea(['address' ,"value"=>$Client->getAddress(), "class"=>"form-control","rows"=>5]); ?>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col text-center">
+				<?php 
+					echo $this->tag->submitButton([
+						"Create client",
+						"class" => "btn btn-info text-white"
+					])
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php 
+echo Phalcon\Tag::endForm();
+?>

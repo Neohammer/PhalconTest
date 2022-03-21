@@ -1,0 +1,116 @@
+
+<?php 
+echo Phalcon\Tag::form('company/edit/'.$Company->getId());
+?>
+<div class="card">
+	<div class="card-header">
+		<h5><span class="fa fa-pen text-success"> </span> Company Edit</h5>
+	</div>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Name *</span>
+				 <?php echo $this->tag->textField(['name' ,"value"=>$Company->getName(), "class"=>"form-control","required"=>1]); ?>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
+				 <?php echo $this->tag->textField(['country',"value"=>$Company->getCountry(), "class"=>"form-control"]); ?>
+				</div>
+					<div  class="form-text text-muted d-sm-none d-md-block">Please use ISO-3166-1 ALPHA-2 code - <a href="https://laendercode.net/en/2-letter-list.html" target="_blank" class="text-info"><span class="fa fa-link"></span> Liste complète</a></div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Cash Balance</span>  
+				 <?php echo $this->tag->numericField(['balance' ,"value"=>$Company->convertBalanceOutput(), "class"=>"form-control","step"=>0.01 , "min"=>0]); ?>
+				</div>
+				<div  class="form-text text-muted d-sm-none d-md-block">Currency : $</div>
+			</div>
+			
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col text-center">
+				<?php 
+					echo $this->tag->submitButton([
+						"Update company informations",
+						"class" => "btn btn-info text-white"
+					])
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="card mt-3">
+	<div class="card-header">
+		<h5><span class="fa fa-list text-success"> </span> Employees List</h5>
+	</div>
+	<div class="card-body">
+		
+		<table class="table table-bordered table-hover">
+			<thead class="thead-light">
+				<tr class="bg-info text-white">
+					<?php if(!$Administrator->getReadOnly()){ ?>
+						<th style="width:2%" class="text-center"><?php echo $this->tag->LinkTo('employee/add/'.$Company->getId(),'<span title="Add an employee" class="fa fa-plus"> </span>'); ?></th>
+					<?php } ?>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Birthday</th>
+					<th>Country</th>
+					<th>First Day</th>
+				</tr>
+			</thead>
+			<tfoot>
+				<tr>
+					<td colspan="6">Employees quantity: <?php echo $Employees->count(); ?></td>
+				</tr>
+			</tfoot>
+			<tbody>
+			<?php 
+			if ($Employees->count() > 0) {
+			?>
+			<?php foreach ($Employees as $employee) { ?>
+				<tr>
+					<?php if(!$Administrator->getReadOnly()){ ?><td nowrap>
+						<?php echo $this->tag->LinkTo(['employee/remove/'.$employee->getId(),'<span title="Delete an employee" class="fa fa-trash text-danger"> </span>','class' => 'action_delete']); ?>
+						&nbsp;&nbsp;
+						<?php echo $this->tag->LinkTo('employee/edit/'.$employee->getId(),'<span title="Edit a employee" class="fa fa-pen text-success"> </span>'); ?>
+					</td><?php } ?>
+					
+					<td><?php echo $employee->getId(); ?></td>
+					<td><?php echo $employee->getName(); ?></td>
+					<td><?php echo $employee->getBirthday(); ?></td>
+					<td><?php echo $employee->getCountry(); ?></td>
+					<td><?php echo $employee->getFirstDayCompany(); ?></td>
+				</tr>
+			<?php } ?>
+			
+		<?php }else{ ?>
+				<tr>
+					<td class="text-center" colspan="5"><i>No results</i></td>
+				</tr>
+			<?php } ?>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="card mt-3">
+	<div class="card-header">
+		<h5><span class="fa fa-box text-success"> </span> Current stock</h5>
+	</div>
+	<div class="card-body">
+		<div class="alert alert-info" role="alert">
+		  <h4 class="alert-heading">Not yet available !</h4>
+		  <p>You will be able to manage your stocks very soon.</p>
+		</div>
+				
+	</div>
+</div>
+<?php 
+echo Phalcon\Tag::endForm();
+?>

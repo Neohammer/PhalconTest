@@ -1,0 +1,54 @@
+<?php echo $this->tag->getDoctype() ?>
+<html>
+    <head>
+        <title>Example</title>
+		
+		<?php 
+			//display all CSS ASSETS
+			$this->assets
+					->addCss('css/bootstrap.min.css')
+					->outputCss(); 
+		?>
+    </head>
+    <body>
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		  <div class="container-fluid">
+			<a class="navbar-brand" href="#">Phantom Project</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<?php if (isset ($Administrator) && $Administrator ) { ?>
+				<div class="collapse navbar-collapse" id="navbarNav">
+				  <ul class="navbar-nav">
+					<li class="nav-item">
+					  <?php echo $this->tag->linkTo(['client',"Clients",'class'=>'nav-link']); ?>
+					</li>
+					<li class="nav-item">
+					  <?php echo $this->tag->linkTo(['company',"Companies",'class'=>'nav-link']); ?>
+					</li>
+					<li class="nav-item">
+					  <?php echo $this->tag->linkTo(['provider',"Providers",'class'=>'nav-link']); ?>
+					</li>
+					<li class="nav-item">
+					  <?php echo $this->tag->linkTo(['product',"Products",'class'=>'nav-link']); ?>
+					</li>
+					<li class="nav-item">
+					  <?php echo $this->tag->linkTo(['transaction',"Transactions",'class'=>'nav-link']); ?>
+					</li>
+				  </ul>
+				</div>
+			<?php } ?>
+		  </div>
+		</nav>
+		<div class="container-fluid" >
+			<?php echo $this->getContent(); ?>
+		</div>
+		<?php 
+			//display all JS ASSETS
+			$this->assets
+					->addJs('js/bootstrap.min.js')
+					->outputJs(); 
+		?>
+    </body>
+</html>

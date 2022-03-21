@@ -1,0 +1,57 @@
+
+<?php 
+echo Phalcon\Tag::form('product/add');
+?>
+<div class="card">
+	<div class="card-header">
+		<h5><span class="fa fa-pen text-success"> </span> Product Add</h5>
+	</div>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Name *</span>
+				 <?php echo $this->tag->textField(['name' ,"value"=>$Product->getName(), "class"=>"form-control","required"=>1]); ?>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Stock</span>
+				 <?php echo $this->tag->numericField(['stock',"value"=>$Product->getStock(), "class"=>"form-control","step"=>1,"min"=>0]); ?>
+				</div>
+					
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Price</span>
+				 <?php echo $this->tag->numericField(['price',"value"=>$Product->getPrice(), "class"=>"form-control","step"=>0.01,"min"=>0.01]); ?>
+				</div>
+					<div  class="form-text text-muted d-sm-none d-md-block">Currency : $</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Taxe</span>
+				 <?php echo $this->tag->numericField(['tax' ,"value"=>$Product->getTax(), "class"=>"form-control","step"=>0.01,"min"=>0,"required"=>1]); ?>
+				</div>
+					<div  class="form-text text-muted d-sm-none d-md-block">Percentage (%)</div>
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col text-center">
+				<?php 
+					echo $this->tag->submitButton([
+						"Create product",
+						"class" => "btn btn-info text-white"
+					])
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php 
+echo Phalcon\Tag::endForm();
+?>

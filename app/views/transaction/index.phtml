@@ -1,0 +1,28 @@
+
+<div class="card">
+	<div class="card-header">
+		<h5><span class="fa fa-eye"> </span> Transactions consultations</h5>
+	</div>
+	<div class="card-body">
+		<div class="row">
+		  <div class="col-sm-6">
+			<div class="card">
+			  <div class="card-body">
+				<h5 class="card-title">Company <span class="fa fa-arrow-right"> </span> Provider</h5>
+				<p class="card-text">Consult transactions between <strong>Companies</strong> and <strong>Providers</strong>.</p>
+				<?php echo $this->tag->LinkTo(["transactionCompany","Show me","class"=>"btn btn-light","onclick"=>'alert("Not available at this time");return false;']); ?>
+			  </div>
+			</div>
+		  </div>
+		  <div class="col-sm-6">
+			<div class="card">
+			  <div class="card-body">
+				<h5 class="card-title">Client <span class="fa fa-arrow-right"> </span> Companies</h5>
+				<p class="card-text">Consult transactions between <strong>Clients</strong> and <strong>Companies</strong>.</p>
+				<?php echo $this->tag->LinkTo(["transactionClient","Show me","class"=>"btn btn-info text-white"]); ?>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+</div>

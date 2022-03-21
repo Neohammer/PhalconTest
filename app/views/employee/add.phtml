@@ -1,0 +1,56 @@
+
+<?php 
+echo Phalcon\Tag::form('employee/add');
+?>
+<div class="card">
+	<div class="card-header">
+		<h5><span class="fa fa-pen text-success"> </span> Employee Add<?php if($Company){ ?> for <?php echo $Company->getName();  } ?></h5>
+	</div>
+	<?php if($Company){  echo $this->tag->hiddenField(['company_id' , "value"=>$Company->getId()]) ; } ?>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+		<div class="row">
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Name *</span>
+				 <?php echo $this->tag->textField(['name' ,"value"=>$Employee->getName(), "class"=>"form-control","required"=>1]); ?>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
+				 <?php echo $this->tag->textField(['country',"value"=>$Employee->getCountry(), "class"=>"form-control"]); ?>
+				</div>
+					<div  class="form-text text-muted d-sm-none d-md-block">Please use ISO-3166-1 ALPHA-2 code - <a href="https://laendercode.net/en/2-letter-list.html" target="_blank" class="text-info"><span class="fa fa-link"></span> Liste complète</a></div>
+			</div>
+		</div>
+		<div class="row mt-3">
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">Birthday</span>
+				 <?php echo $this->tag->dateField(['birthday' ,"value"=>$Employee->getBirthDay(), "class"=>"form-control"]); ?>
+				</div>
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="inputGroup-sizing-default">First day on company</span>
+				 <?php echo $this->tag->dateField(['first_day_company' ,"value"=>$Employee->getFirstDayCompany(), "class"=>"form-control"]); ?>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row mt-3">
+			<div class="col text-center">
+				<?php 
+					echo $this->tag->submitButton([
+						"Create employee",
+						"class" => "btn btn-info text-white"
+					])
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php 
+echo Phalcon\Tag::endForm();
+?>

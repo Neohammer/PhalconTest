@@ -1,0 +1,56 @@
+
+<div class="card">
+	<div class="card-header">
+		<h5>Products' list</h5>
+	</div>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+			<table class="table table-bordered table-hover">
+				<thead class="thead-light">
+					<tr class="bg-info text-white">
+						<?php if(!$Administrator->getReadOnly()){ ?>
+							<th style="width:2%" class="text-center"><?php echo $this->tag->LinkTo('product/add','<span title="Add a product" class="fa fa-plus text-success"> </span>'); ?></th>
+						<?php } ?>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Price ($)</th>
+						<th>Tax (%)</th>
+						<th>Price with Tax ($)</th>
+						<th>Stock</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="3">Products quantity: <?php echo $Products->count(); ?></td>
+					</tr>
+				</tfoot>
+				<tbody>
+				<?php 
+				if ($Products->count() > 0) {
+				?>
+				<?php foreach ($Products as $product) { ?>
+					<tr>
+						<?php if(!$Administrator->getReadOnly()){ ?><td nowrap>
+							<?php echo $this->tag->LinkTo(['product/remove/'.$product->getId(),'<span title="Delete a product" class="fa fa-trash text-danger"> </span>','class' => 'action_delete']); ?>
+							&nbsp;&nbsp;
+							<?php echo $this->tag->LinkTo('product/edit/'.$product->getId(),'<span title="Edit a product" class="fa fa-pen text-success"> </span>'); ?>
+						</td><?php } ?>
+						
+						<td><?php echo $product->getId(); ?></td>
+						<td><?php echo $product->getName(); ?></td>
+						<td><?php echo $product->convertPriceOutput(); ?></td>
+						<td><?php echo $product->convertTaxOutput(); ?></td>
+						<td><?php echo number_format($product->getPriceWithTax(),2,'.',''); ?></td>
+						<td><?php echo $product->getStock(); ?></td>
+					</tr>
+				<?php } ?>
+				
+			<?php }else{ ?>
+					<tr>
+						<td class="text-center" colspan="5"><i>No results</i></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+{
+    "require": {
+		"php": ">=7.4",
+        "phalcon/devtools": "^4.2",
+		"ext-phalcon": "^4.0",
+        "twig/twig": "3.3.8"
+    },
+  "require-dev": {
+    "phalcon/devtools": "^4.0",
+    "phpunit/phpunit": "^6.3",
+        "phalcon/incubator": "4.0.0-alpha.7",
+        "codeception/module-phalcon4": "dev-master"
+  },
+  "minimum-stability": "dev",
+  
+ "autoload-dev": {
+	"psr-4": {
+		"Tests\\": "tests"
+	}
+    }
+}

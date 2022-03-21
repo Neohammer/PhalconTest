@@ -1,0 +1,52 @@
+
+<div class="card">
+	<div class="card-header">
+		<h5>Clients' list</h5>
+	</div>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+			<table class="table table-bordered table-hover">
+				<thead class="thead-light">
+					<tr class="bg-info text-white">
+						<?php if(!$Administrator->getReadOnly()){ ?>
+							<th style="width:2%" class="text-center"><?php echo $this->tag->LinkTo('client/add','<span title="Add a client" class="fa fa-plus text-success"> </span>'); ?></th>
+						<?php } ?>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Country</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="3">Clients quantity: <?php echo $Clients->count(); ?></td>
+					</tr>
+				</tfoot>
+				<tbody>
+				<?php 
+				if ($Clients->count() > 0) {
+				?>
+				<?php foreach ($Clients as $client) { ?>
+					<tr>
+						<?php if(!$Administrator->getReadOnly()){ ?><td nowrap>
+							<?php echo $this->tag->LinkTo(['client/remove/'.$client->getId(),'<span title="Delete a client" class="fa fa-trash text-danger"> </span>','class' => 'action_delete']); ?>
+							&nbsp;&nbsp;
+							<?php echo $this->tag->LinkTo('client/edit/'.$client->getId(),'<span title="Edit a client" class="fa fa-pen text-success"> </span>'); ?>
+						</td><?php } ?>
+						
+						<td><?php echo $client->getId(); ?></td>
+						<td><?php echo $client->getName(); ?></td>
+						<td><?php echo nl2br($client->getAddress()); ?></td>
+						<td><?php echo $client->getCountry(); ?></td>
+					</tr>
+				<?php } ?>
+				
+			<?php }else{ ?>
+					<tr>
+						<td class="text-center" colspan="5"><i>No results</i></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+	</div>
+</div>

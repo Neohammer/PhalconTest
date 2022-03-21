@@ -1,0 +1,52 @@
+
+<div class="card">
+	<div class="card-header">
+		<h5>Providers' list</h5>
+	</div>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+			<table class="table table-bordered table-hover">
+				<thead class="thead-light">
+					<tr class="bg-info text-white">
+						<?php if(!$Administrator->getReadOnly()){ ?>
+							<th style="width:2%" class="text-center"><?php echo $this->tag->LinkTo('provider/add','<span title="Add a provider" class="fa fa-plus text-success"> </span>'); ?></th>
+						<?php } ?>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Address</th>
+						<th>Country</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="3">Providers quantity: <?php echo $Providers->count(); ?></td>
+					</tr>
+				</tfoot>
+				<tbody>
+				<?php 
+				if ($Providers->count() > 0) {
+				?>
+				<?php foreach ($Providers as $provider) { ?>
+					<tr>
+						<?php if(!$Administrator->getReadOnly()){ ?><td nowrap>
+							<?php echo $this->tag->LinkTo(['provider/remove/'.$provider->getId(),'<span title="Delete a provider" class="fa fa-trash text-danger"> </span>','class' => 'action_delete']); ?>
+							&nbsp;&nbsp;
+							<?php echo $this->tag->LinkTo('provider/edit/'.$provider->getId(),'<span title="Edit a provider" class="fa fa-pen text-success"> </span>'); ?>
+						</td><?php } ?>
+						
+						<td><?php echo $provider->getId(); ?></td>
+						<td><?php echo $provider->getName(); ?></td>
+						<td><?php echo nl2br($provider->getAddress()); ?></td>
+						<td><?php echo $provider->getCountry(); ?></td>
+					</tr>
+				<?php } ?>
+				
+			<?php }else{ ?>
+					<tr>
+						<td class="text-center" colspan="5"><i>No results</i></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+	</div>
+</div>

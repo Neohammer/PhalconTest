@@ -1,0 +1,52 @@
+
+<div class="card">
+	<div class="card-header">
+		<h5>Transactions between Companies and Clients</h5>
+	</div>
+	<div class="card-body">
+		<?php echo $this->flash->output(); ?>
+			<table class="table table-bordered table-hover">
+				<thead class="thead-light">
+					<tr class="bg-info text-white">
+						<?php if(!$Administrator->getReadOnly()){ ?>
+							<th style="width:2%" class="text-center"><?php echo $this->tag->LinkTo('transactionClient/add','<span title="Add a transaction" class="fa fa-plus text-success"> </span>'); ?></th>
+						<?php } ?>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Balance</th>
+						<th>Country</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<td colspan="3">Transactions quantity: <?php echo $Transactions->count(); ?></td>
+					</tr>
+				</tfoot>
+				<tbody>
+				<?php 
+				if ($Transactions->count() > 0) {
+				?>
+				<?php foreach ($Companies as $company) { ?>
+					<tr>
+						<?php if(!$Administrator->getReadOnly()){ ?><td nowrap>
+							<?php echo $this->tag->LinkTo(['transactionClient/remove/'.$company->getId(),'<span title="Delete a transaction" class="fa fa-trash text-danger"> </span>','class' => 'action_delete']); ?>
+							&nbsp;&nbsp;
+							<?php echo $this->tag->LinkTo('transactionClient/edit/'.$company->getId(),'<span title="Edit a transaction" class="fa fa-pen text-success"> </span>'); ?>
+						</td><?php } ?>
+						
+						<td><?php echo $company->getId(); ?></td>
+						<td><?php echo $company->getName(); ?></td>
+						<td>$<?php echo $company->convertBalanceOutput(); ?></td>
+						<td><?php echo $company->getCountry(); ?></td>
+					</tr>
+				<?php } ?>
+				
+			<?php }else{ ?>
+					<tr>
+						<td class="text-center" colspan="5"><i>No results</i></td>
+					</tr>
+				<?php } ?>
+				</tbody>
+			</table>
+	</div>
+</div>

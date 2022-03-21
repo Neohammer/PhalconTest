@@ -1,0 +1,4 @@
+vendor/
+RemoteSystemsTempFiles/
+.metadata/
+.phalcon/

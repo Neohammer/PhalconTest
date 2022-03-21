@@ -1,0 +1,56 @@
+
+<?php 
+echo Phalcon\Tag::form("/");
+?>
+<div class="row justify-content-center">
+	<div class="col-12 col-md-9 col-lg-6">
+	
+		<div class="card text-center">
+			<div class="card-header bg-info text-white">
+				<h5>BackOffice Login</h5>
+			</div>
+			<div class="card-body">
+				
+				<?php echo $this->flash->output(); ?>
+			
+			
+				<div class="mb-3 row">
+					<label for="staticEmail" class="col-sm-2 col-form-label"><strong>Login</strong></label>
+					<div class="col-sm-10 text-right">
+						<?php 
+							echo Phalcon\Tag::emailField([
+								"login",
+								 "class" => "form-control",
+								 "required" => 1
+							]); 
+						?>
+					</div>
+				</div>
+				<div class="mb-3 row">
+					<label for="inputPassword" class="col-sm-2 col-form-label"><strong>Password</strong></label>
+					<div class="col-sm-10">
+						<?php 
+							echo Phalcon\Tag::passwordField([
+								"password",
+								 "class" => "form-control",
+								"required" => 1
+							]); 
+						?>
+					</div>
+				</div>
+				
+				<div class="d-grid gap-2 col-12 col-lg-4 mx-auto">
+					<?php 
+							echo Phalcon\Tag::submitButton([
+								"Login",
+								"class" => "btn btn-info text-white"
+							])
+						?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php 
+echo Phalcon\Tag::endForm();
+?>
